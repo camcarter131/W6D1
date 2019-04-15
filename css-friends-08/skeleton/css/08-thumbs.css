@@ -1,0 +1,11 @@
+/* PHASE 8: Thumbs */
+
+ .friends-list li {
+    float: left;
+    width: 33%;
+    height: 33%;
+ }
+
+ .thumb {
+
+ }

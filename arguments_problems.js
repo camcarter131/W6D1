@@ -127,8 +127,21 @@ Function.prototype.curry = function (numArgs) {
     }
 };
 
+Function.prototype.curryApply = function (numArgs) {
+    const arggs = [];
+    const that = this;
+    return function curried(arg) {
+        arggs.push(arg);
+        if (arggs.length === numArgs) {
+            return that.apply(that, arggs);
+        } else {
+            return curried;
+        }
+    }
+};
+
 // TEST
-function summer (nums) {
+function summer (...nums) {
     let sum = 0;
     nums.forEach((n) => {
         sum += n;
@@ -136,5 +149,5 @@ function summer (nums) {
     return sum;
 };
 
-console.log(summer.curry(4)(5)(30)(20)(1)); // 56
-console.log(summer.curry(3)(4)(20)(6)); // 30
+console.log(summer.curryApply(4)(5)(30)(20)(1)); // 56
+console.log(summer.curryApply(3)(4)(20)(6)); // 30
